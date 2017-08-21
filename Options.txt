@@ -1,0 +1,3 @@
+1)Enter data
+2)Read data from file
+3)Exit
