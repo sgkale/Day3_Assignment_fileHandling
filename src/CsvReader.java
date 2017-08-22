@@ -4,11 +4,10 @@ public class CsvReader {
 
     private String COMMA=",";
     private String NEWLINE="\n";
-    //private FileInputStream reader;
     private String data;
     private String[] tempData;
     private BufferedReader reader;
-    Details obj;
+    private String Option="";
     int i;
 
     CsvReader(){
@@ -43,6 +42,10 @@ public class CsvReader {
             }
         }
 
+    }
+    public String readOption(){
+
+        return Option;
     }
 
 

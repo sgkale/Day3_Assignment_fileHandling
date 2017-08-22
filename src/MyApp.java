@@ -9,8 +9,19 @@ public class MyApp {
     public static void main(String[] args) {
         String data="";
         BufferedReader reader = null;
+        BufferedReader reader2 = null;
         Scanner sc=new Scanner(System.in);
-        int option;
+        String[] option=null;
+        int option2;
+        try {
+            reader2=new BufferedReader(new FileReader("Input.txt"));
+            option=reader2.readLine().split(",");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         try{
             reader=new BufferedReader(new FileReader("Options.txt"));
@@ -28,32 +39,41 @@ public class MyApp {
                 e.printStackTrace();
             }
         }
+        int j=0;
         do{
+
             System.out.println("Select option :");
-            option=sc.nextInt();
-            switch (option){
+            option2=Integer.parseInt(option[j]);
+            switch (option2){
                 case 1:
                     Details[] details=new Details[5];
                     CsvWriter writer=new CsvWriter();
                     for(int i= 0;i<2;i++){
-                        details[i]=new Details();
-                        System.out.println("Enter id");
-                        details[i].setEmpId(sc.nextInt());
-                        System.out.println("Enter name");
-                        details[i].setName(sc.next());
-                        System.out.println("Enter Location");
-                        details[i].setLocation(sc.next());
-                        writer.writeDate(details[i]);
+                        try {
+                            details[i] = new Details();
+                            System.out.println("Reading id");
+                            details[i].setEmpId(Integer.parseInt(reader2.readLine()));
+                            System.out.println("Reading name");
+                            details[i].setName(reader2.readLine());
+                            System.out.println("Reading Location");
+                            details[i].setLocation(reader2.readLine());
+                            writer.writeDate(details[i]);
+                        }catch (Exception e){
+
+                        }
                     }
+                    j++;
                     break;
                 case 2:
                     CsvReader csvReader=new CsvReader();
                     csvReader.readFile();
+                    j++;
                     break;
                 default:
                      break;
             }
-        }while (option!=3);
+
+        }while (option2!=3);
 
     }
 }
